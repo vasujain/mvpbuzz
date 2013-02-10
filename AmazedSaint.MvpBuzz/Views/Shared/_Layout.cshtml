@@ -89,6 +89,7 @@
     </div>
         </div>
 
+    <script type="text/javascript" src="/Scripts/imagesloaded.js"></script>
     <script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="/Scripts/mansonary.js"></script>
@@ -121,12 +122,15 @@
                                 {
                                 }
                             });
-                            $('#subcontent').masonry({
-                                // options
-                                itemSelector: '.tile',
-                                columnWidth: 240
+
+                            $('#subcontent').imagesLoaded(function() {
+                                $('#subcontent').masonry({
+                                    // options
+                                    itemSelector: '.tile',
+                                    columnWidth: 240
+                                });
+                                $("#loaddiv").hide();
                             });
-                            $("#loaddiv").hide();
                  });
                 e.parent().siblings().removeClass("active");
                 e.parent().addClass("active");
