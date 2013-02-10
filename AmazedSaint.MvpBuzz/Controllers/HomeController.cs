@@ -50,16 +50,16 @@ namespace AmazedSaint.MvpBuzz.Controllers
         [OutputCache(Duration = 4000, VaryByParam = "term;window;type")]
         public ActionResult Render(string term,string window, string type)
         {
-            var url = String.Format("http://otter.topsy.com/search.json?q={0}&window={1}&type={2}&apikey=2D33HFEUDVGQGLZAOQJQAAAAACGLANA4ENIQAAAAAAAFQGYA&perpage=100&allow_lang=en", HttpUtility.UrlEncode(term), window, type);
-           dynamic obj = HttpContext.Cache[url];
+            var u = String.Format("http://otter.topsy.com/search.json?q={0}&window={1}&type={2}&apikey=2D33HFEUDVGQGLZAOQJQAAAAACGLANA4ENIQAAAAAAAFQGYA&perpage=100&allow_lang=en", HttpUtility.UrlEncode(term), window, type);
+           dynamic obj = HttpContext.Cache[u];
 
            if (obj == null)
            {
-               using (var wc = new WebClient())
+               using (var w = new WebClient())
                {
-                   string json = wc.DownloadString(url);
+                   string json = w.DownloadString(u);
                    obj = JsonConvert.DeserializeObject(json);
-                   HttpContext.Cache.Insert(url, obj, null, DateTime.Now.AddHours(1), Cache.NoSlidingExpiration);
+                   HttpContext.Cache.Insert(u, obj, null, DateTime.Now.AddHours(1), Cache.NoSlidingExpiration);
                }
            }
             return PartialView(obj);

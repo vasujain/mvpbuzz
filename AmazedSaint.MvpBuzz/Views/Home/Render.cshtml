@@ -22,9 +22,11 @@
                     <img src="@item.medium_thumbnail" alt="@item.title"/>
                 </div>
             }
+            <a href="@(item.url??"")" >
             <div class="twittercontent">
                 @h.Raw((string)item.title)
             </div>
+                </a>
 
             @if (item.mytype != "tweet")
             {
