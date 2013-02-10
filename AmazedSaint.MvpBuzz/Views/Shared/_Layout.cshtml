@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>MvpBuzz - Follow The Buzz From Microsoft MVPs</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="/Content/bootstrap-responsive.min.css" />
+
+    <style>
+        .picktype
+        {
+        }
+
+        .pickwindow
+        {
+        }
+        .twittercontent{}
+        .tile
+        {
+            width: 200px;
+            float: left;
+            margin: 10px;
+            border: #dfdfdf 1px solid;
+            padding:7px            
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="mainnav" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">MvpBuzz</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="#">Home</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    
+      
+    <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well" id="loaddiv">
+                <img src="/Images/loading.gif" width="40" height="40" />
+                | Hold On, Loading..
+            </div>
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Show</li>
+                    <li data-type="" class="active"><a class="picktype" href="#">Everything</a></li>
+                    <li data-type="link"><a class="picktype" href="#">Stories</a></li>
+                    <li data-type="video"><a class="picktype" href="#">Videos</a></li>
+                    <li data-type="image"><a class="picktype" href="#">Pictures</a></li>
+                </ul>
+            </div>
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Popular In</li>
+                    <li data-window="h"><a class="pickwindow" href="#">Last Hour</a></li>
+                    <li data-window="d"><a class="pickwindow" href="#">Last Day</a></li>
+                    <li data-window="w" class="active"><a class="pickwindow" href="#">Last Week</a></li>
+                    <li data-window="m"><a class="pickwindow" href="#">Last Month</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--/span-->
+        <div class="span9"  id="mainContent">                
+            @RenderBody()
+        </div>
+        <!--/span-->
+        <hr>
+
+        <footer>
+            <p>&copy; Follow the MvpBuzz</p>
+        </footer>
+    </div>
+        </div>
+
+    <script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Scripts/mansonary.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+
+
+        //Simple revealing module
+        var buzzapp = (function () {
+
+            var config = {};
+            config.window = "w";
+            config.type = "";
+            config.term = "#mvpbuzz OR #MVP13 OR #MVPBUZZ";
+
+            config.render = function (e) {
+                $("#loaddiv").show();
+                $.get('/Home/Render',
+                    { term: config.term, window: config.window, type: config.type },
+                        function (data) {
+                            $('#mainContent').html('<div id="subcontent"></div>');
+                            $('#subcontent').html(data);
+                            $(".twittercontent").each(function (index) {
+                                try {
+                                    $(this).html($(this).html().parseURL().parseUsername().parseHashtag());
+                                }
+                                catch(e)
+                                {
+                                }
+                            });
+                            $('#subcontent').masonry({
+                                // options
+                                itemSelector: '.tile',
+                                columnWidth: 240
+                            });
+                            $("#loaddiv").hide();
+                 });
+                e.parent().siblings().removeClass("active");
+                e.parent().addClass("active");
+            };
+            return config;
+        }());
+
+
+        $(document).ready(function () {
+            $(".pickwindow").click(function () {
+                buzzapp.window = $(this).parent().attr("data-window");
+                buzzapp.render($(this));
+            });
+
+            $(".picktype").click(function () {
+                buzzapp.type = $(this).parent().attr("data-type");
+                buzzapp.render($(this));
+            });
+            //For the first time
+            buzzapp.render($(this));
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        String.prototype.parseURL =
+            function () {
+                return this.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g,
+    function (url) { return url.link(url); });
+            }; String.prototype.parseUsername = function () {
+                return this.replace(/[@@]+[A-Za-z0-9-_]+/g, function (u) {
+                    var username = u.replace("@@", "");
+                    return u.link("http://twitter.com/" + username);
+                });
+            }; String.prototype.parseHashtag = function () {
+                return this.replace(/[#]+[A-Za-z0-9-_]+/g, function (t) {
+                    var tag = t.replace("#", "%23");
+                    return t.link("http://search.twitter.com/search?q=" + tag);
+                });
+            };
+    </script>
+
+</body>
+
+</html>
