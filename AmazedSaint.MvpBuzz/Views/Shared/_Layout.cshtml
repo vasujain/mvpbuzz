@@ -54,9 +54,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="brand" href="/Home/View?s=&title=Home">MvpBuzz</a>
+                <a class="brand" href="@Url.Action("View", "Home", new { s = "#mpvbuzz", title = "MvpBuzz" })">MvpBuzz</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
+                        <li><a href="@Url.Action("View", "Home", new { s = "#MVP13", title = "Mvp13" })">
+                            MVP13</a></li>
                         <li><a href="@Url.Action("View", "Home", new { s = "CSharp OR MSDN OR TypeScript OR VB.NET OR #VS2012", title = "Developers" })">
                             Developers</a></li>
                         <li><a href="@Url.Action("View", "Home", new { s = "#Azure OR Office365 OR HadoopOnAzure OR HDInsight OR PowerPivot OR PowerView", title = "Cloud" })">
@@ -95,8 +97,8 @@
                 <div class="well sidebar-nav">
                     <ul class="nav nav-list">
                         <li class="nav-header">Show</li>
-                        <li data-type="" class="active"><a class="picktype" href="#">Everything</a></li>
-                        <li data-type="link"><a class="picktype" href="#">Articles</a></li>
+                        <li data-type=""><a class="picktype" href="#">Everything</a></li>
+                        <li data-type="link" class="active"><a class="picktype" href="#">Articles</a></li>
                         <li data-type="video"><a class="picktype" href="#">Videos</a></li>
                         <li data-type="image"><a class="picktype" href="#">Pictures</a></li>
                         <li data-type="tweet"><a class="picktype" href="#">Tweets</a></li>
@@ -107,8 +109,8 @@
                         <li class="nav-header">Popular In</li>
                         <li data-window="h"><a class="pickwindow" href="#">Last Hour</a></li>
                         <li data-window="d"><a class="pickwindow" href="#">Last Day</a></li>
-                        <li data-window="w" class="active"><a class="pickwindow" href="#">Last Week</a></li>
-                        <li data-window="m"><a class="pickwindow" href="#">Last Month</a></li>
+                        <li data-window="w"><a class="pickwindow" href="#">Last Week</a></li>
+                        <li data-window="m"  class="active"><a class="pickwindow" href="#">Last Month</a></li>
                     </ul>
                 </div>
 

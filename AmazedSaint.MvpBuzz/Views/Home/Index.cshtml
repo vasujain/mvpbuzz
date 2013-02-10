@@ -5,8 +5,8 @@
         var buzzapp = (function () {
 
             var config = {};
-            config.window = "w";
-            config.type = "";
+            config.window = "m";
+            config.type = "link";
             config.term = "@ViewBag.Term";
 
             config.render = function (e) {
@@ -60,7 +60,7 @@
         String.prototype.parseURL =
             function () {
                 return this.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g,
-    function (url) { return url.link(url); });
+    function (url) { return '<b>Read &gt;&gt;</b>'.link(url); });
             }; String.prototype.parseUsername = function () {
                 return this.replace(/[@@]+[A-Za-z0-9-_]+/g, function (u) {
                     var username = u.replace("@@", "");
