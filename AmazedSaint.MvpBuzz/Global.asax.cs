@@ -16,6 +16,7 @@ namespace AmazedSaint.MvpBuzz
     {
         protected void Application_Start()
         {
+            //Register all the areas
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
