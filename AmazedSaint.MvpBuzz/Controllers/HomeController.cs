@@ -11,16 +11,18 @@ namespace AmazedSaint.MvpBuzz.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string q = "#mvpbuzz OR #MVP13 OR #MVPBUZZ", string t="MvpBuzz")
         {
-            string def= "#mvpbuzz OR #MVP13 OR #MVPBUZZ";
-            string query = Session["term"] as string ?? def;
-            ViewBag.Term = (string.IsNullOrEmpty(query) || string.IsNullOrWhiteSpace(query)) ? def : query;
+            string query = Session["term"] as string ?? q;
+            string title = Session["title"] as string ?? t;
+            ViewBag.Term = (string.IsNullOrEmpty(query) || string.IsNullOrWhiteSpace(query)) ? q : query;
+            ViewBag.Title = (string.IsNullOrEmpty(title) || string.IsNullOrWhiteSpace(title)) ? t : title;
 
-            List<string> terms = Session["recent"] as List<string> ?? new List<string>();
-            if (!terms.Contains(query) && query!=def)
+            Dictionary<string, string> terms = Session["recent"] as Dictionary<string, string> ?? new Dictionary<string, string>();
+            if (query!=q)
             {
-                terms.Add(query);
+                if (terms.Keys.Contains(query)) terms.Remove(query);
+                terms.Add(query,title??query);
             }
 
             Session["recent"] = terms;
@@ -28,9 +30,10 @@ namespace AmazedSaint.MvpBuzz.Controllers
             return View();
         }
 
-        public ActionResult View(string s)
+        public ActionResult View(string s,string title)
         {
             Session["term"] = s;
+            Session["title"] = title ?? s;
             return RedirectToAction("Index");
         }
 
@@ -47,7 +50,7 @@ namespace AmazedSaint.MvpBuzz.Controllers
         [OutputCache(Duration = 4000, VaryByParam = "term;window;type")]
         public ActionResult Render(string term,string window, string type)
         {
-           var url= String.Format("http://otter.topsy.com/search.json?q={0}&window={1}&type={2}&apikey=2D33HFEUDVGQGLZAOQJQAAAAACGLANA4ENIQAAAAAAAFQGYA&perpage=100",HttpUtility.UrlEncode(term),window,type);
+            var url = String.Format("http://otter.topsy.com/search.json?q={0}&window={1}&type={2}&apikey=2D33HFEUDVGQGLZAOQJQAAAAACGLANA4ENIQAAAAAAAFQGYA&perpage=100&allow_lang=en", HttpUtility.UrlEncode(term), window, type);
            dynamic obj = HttpContext.Cache[url];
 
            if (obj == null)

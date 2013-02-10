@@ -10,7 +10,7 @@ namespace AmazedSaint.MvpBuzz.Helpers
     {
         static public IHtmlString Raw(string s)
         {
-            return new HtmlString(HttpUtility.HtmlDecode(s));
+            return new HtmlString(HttpUtility.HtmlDecode(s.Length > 200 ? s.Substring(0,190) : s));
         }
        
     }
