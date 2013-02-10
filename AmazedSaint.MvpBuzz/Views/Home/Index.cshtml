@@ -1,3 +1,75 @@
-﻿<div class="thumbnail">
-    <img src="/Images/mvp.png" style="padding:20px"/>
-</div>
+﻿Loading..
+
+<script>
+        //Simple revealing module
+        var buzzapp = (function () {
+
+            var config = {};
+            config.window = "w";
+            config.type = "";
+            config.term = "@ViewBag.Term";
+
+            config.render = function (e) {
+                $("#loaddiv").show();
+                $.get('/Home/Render',
+                    { term: config.term, window: config.window, type: config.type },
+                        function (data) {
+                            $('#mainContent').html('<div id="subcontent"></div>');
+                            $('#subcontent').html(data);
+                            $(".twittercontent").each(function (index) {
+                                try {
+                                    $(this).html($(this).html().parseURL().parseUsername().parseHashtag());
+                                }
+                                catch(e)
+                                {
+                                }
+                            });
+
+                            $('#subcontent').imagesLoaded(function() {
+                                $('#subcontent').masonry({
+                                    // options
+                                    itemSelector: '.tile',
+                                    columnWidth: 240
+                                });
+                                $("#loaddiv").hide();
+                            });
+                 });
+                e.parent().siblings().removeClass("active");
+                e.parent().addClass("active");
+            };
+            return config;
+        }());
+
+
+        $(document).ready(function () {
+            $(".pickwindow").click(function () {
+                buzzapp.window = $(this).parent().attr("data-window");
+                buzzapp.render($(this));
+            });
+
+            $(".picktype").click(function () {
+                buzzapp.type = $(this).parent().attr("data-type");
+                buzzapp.render($(this));
+            });
+            //For the first time
+            buzzapp.render($(this));
+        });
+    </script>
+
+    <script type="text/javascript">
+        String.prototype.parseURL =
+            function () {
+                return this.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g,
+    function (url) { return url.link(url); });
+            }; String.prototype.parseUsername = function () {
+                return this.replace(/[@@]+[A-Za-z0-9-_]+/g, function (u) {
+                    var username = u.replace("@@", "");
+                    return u.link("/Home/View?s=@@" + username);
+                });
+            }; String.prototype.parseHashtag = function () {
+                return this.replace(/[#]+[A-Za-z0-9-_]+/g, function (t) {
+                    var tag = t.replace("#", "%23");
+                    return t.link("/Home/View?s=" + tag);
+                });
+            };
+    </script>

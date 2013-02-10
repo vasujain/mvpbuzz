@@ -13,7 +13,25 @@ namespace AmazedSaint.MvpBuzz.Controllers
     {
         public ActionResult Index()
         {
+            string def= "#mvpbuzz OR #MVP13 OR #MVPBUZZ";
+            string query = Session["term"] as string ?? def;
+            ViewBag.Term = (string.IsNullOrEmpty(query) || string.IsNullOrWhiteSpace(query)) ? def : query;
+
+            List<string> terms = Session["recent"] as List<string> ?? new List<string>();
+            if (!terms.Contains(query) && query!=def)
+            {
+                terms.Add(query);
+            }
+
+            Session["recent"] = terms;
+
             return View();
+        }
+
+        public ActionResult View(string s)
+        {
+            Session["term"] = s;
+            return RedirectToAction("Index");
         }
 
         public ActionResult About()

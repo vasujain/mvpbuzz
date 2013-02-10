@@ -7,6 +7,12 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="/Content/bootstrap.min.css" />
     <link rel="stylesheet" href="/Content/bootstrap-responsive.min.css" />
+    <script type="text/javascript" src="/Scripts/imagesloaded.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Scripts/mansonary.js"></script>
+
+
 
     <style>
         .picktype
@@ -38,11 +44,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="brand" href="#">MvpBuzz</a>
+                <a class="brand" href="/Home/View?s=">MvpBuzz</a>
                 <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li class="active"><a href="#">Home</a></li>
-                    </ul>
                 </div>
                 <!--/.nav-collapse -->
             </div>
@@ -76,8 +79,26 @@
                 </ul>
             </div>
             
-             <div class="well sidebar-nav">
-                 A quick hack by <a href="https://twitter.com/intent/user?screen_name=amazedsaint">Anoop Madhusudanan</a>. Powered by the <a href="https://twitter.com/intent/user?screen_name=topsy">Topsy</a> APIs. This site, design, or content is not in anyway linked or related to Microsoft.
+            @{
+                var list=Session["recent"] as List<string>;
+            }
+            
+            @if (list!=null && list.Count>0)
+            {
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Recent</li>
+                    @foreach(var li in list)
+                    {
+                        <li><a href="/Home/View?s=@li">@li</a></li>
+                    }
+                </ul>
+            </div>
+            }
+            
+            <div class="well sidebar-nav">
+                <small>A quick hack by <a href="/Home/View?s=amazedsaint">Anoop Madhusudanan</a>. Powered by the <a target="_blank" href="https://twitter.com/intent/user?screen_name=topsy">Topsy</a> APIs. 
+                    </small>
             </div>
 
 
@@ -88,97 +109,16 @@
         </div>
         <!--/span-->
         <hr>
-
-        <footer>
-            <p>&copy; Follow the MvpBuzz</p>
-        </footer>
-    </div>
+        <div class="span11">
+            <hr/>
+            <b>MvpBuzz </b>- <a href="http://amazedsaint.com">By Anoop </a> | <a href="https://github.com/amazedsaint/mvpbuzz">Fork in Github</a>
+            <br/><small>Disclaimer: This site, design, or content is not maintained or managed by Microsoft, and may not be the opinion of Microsoft in anyway. All opinions are from the respective individuals and or MVPs, as pulled from Twitter.</small>
         </div>
-
-    <script type="text/javascript" src="/Scripts/imagesloaded.js"></script>
-    <script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="/Scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/Scripts/mansonary.js"></script>
-
+    </div>
+   </div>
     @RenderSection("scripts", required: false)
 
-    <script>
-
-
-        //Simple revealing module
-        var buzzapp = (function () {
-
-            var config = {};
-            config.window = "w";
-            config.type = "";
-            config.term = "#mvpbuzz OR #MVP13 OR #MVPBUZZ";
-
-            config.render = function (e) {
-                $("#loaddiv").show();
-                $.get('/Home/Render',
-                    { term: config.term, window: config.window, type: config.type },
-                        function (data) {
-                            $('#mainContent').html('<div id="subcontent"></div>');
-                            $('#subcontent').html(data);
-                            $(".twittercontent").each(function (index) {
-                                try {
-                                    $(this).html($(this).html().parseURL().parseUsername().parseHashtag());
-                                }
-                                catch(e)
-                                {
-                                }
-                            });
-
-                            $('#subcontent').imagesLoaded(function() {
-                                $('#subcontent').masonry({
-                                    // options
-                                    itemSelector: '.tile',
-                                    columnWidth: 240
-                                });
-                                $("#loaddiv").hide();
-                            });
-                 });
-                e.parent().siblings().removeClass("active");
-                e.parent().addClass("active");
-            };
-            return config;
-        }());
-
-
-        $(document).ready(function () {
-            $(".pickwindow").click(function () {
-                buzzapp.window = $(this).parent().attr("data-window");
-                buzzapp.render($(this));
-            });
-
-            $(".picktype").click(function () {
-                buzzapp.type = $(this).parent().attr("data-type");
-                buzzapp.render($(this));
-            });
-            //For the first time
-            buzzapp.render($(this));
-        });
-    </script>
-
-    <script type="text/javascript">
-
-        String.prototype.parseURL =
-            function () {
-                return this.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g,
-    function (url) { return url.link(url); });
-            }; String.prototype.parseUsername = function () {
-                return this.replace(/[@@]+[A-Za-z0-9-_]+/g, function (u) {
-                    var username = u.replace("@@", "");
-                    return u.link("http://twitter.com/" + username);
-                });
-            }; String.prototype.parseHashtag = function () {
-                return this.replace(/[#]+[A-Za-z0-9-_]+/g, function (t) {
-                    var tag = t.replace("#", "%23");
-                    return t.link("http://search.twitter.com/search?q=" + tag);
-                });
-            };
-    </script>
-
+    
 </body>
 
 </html>
