@@ -28,7 +28,8 @@
             margin-bottom: 10px;
         }
 
-        a {
+        a
+        {
             color: gray;
         }
 
@@ -42,6 +43,10 @@
             background: #fafafa;
         }
     </style>
+    
+    <script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "1ea0347d-ae3e-41c5-a1bc-611c00e6eb94", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 
 </head>
 
@@ -54,11 +59,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="brand" href="@Url.Action("View", "Home", new {s = "CSharp OR MSDN OR TypeScript OR VB.NET OR #VS2012", title = "Developers"  })">MvpBuzz</a>
+                <a class="brand" href="@Url.Action("View", "Home", new { s = "CSharp OR MSDN OR TypeScript OR VB.NET OR #VS2012", title = "Developers" })">
+                    MvpBuzz</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li><a href="@Url.Action("View", "Home", new { s = "#MVP13", title = "Mvp13" })">
-                            MVP13</a></li>
+                        <li><a href="@Url.Action("View", "Home", new { s = "#MVP13", title = "Mvp13" })">MVP13</a>
+                        </li>
                         <li><a href="@Url.Action("View", "Home", new { s = "CSharp OR MSDN OR TypeScript OR VB.NET OR #VS2012", title = "Developers" })">
                             Developers</a></li>
                         <li><a href="@Url.Action("View", "Home", new { s = "#Azure OR Office365 OR HadoopOnAzure OR HDInsight OR PowerPivot OR PowerView", title = "Cloud" })">
@@ -71,11 +77,20 @@
                             Phone</a></li>
                         <li><a href="@Url.Action("View", "Home", new { s = "SharePoint OR MSCRM OR Dynamics OR PowerView", title = "SharePoint" })">
                             Sharepoint</a></li>
-                        <li><a href="@Url.Action("View", "Home", new { s = "#mvpbuzz", title = "Buzz" })">
-                            Buzz</a></li>
+                        <li><a href="@Url.Action("View", "Home", new { s = "#mvpbuzz", title = "Buzz" })">Buzz</a>
+                        </li>
                         <li><a href="@Url.Action("View", "Home", new { s = "XBox OR sp2013 OR lookingglass OR Surface OR Kinect", title = "Other" })">
                             More..</a></li>
                     </ul>
+                </div>
+                <div class="nav-collapse collapse pull-right">
+                    <span class='st_sharethis_large' displaytext='ShareThis'></span>
+                    <span class='st_facebook_large' displaytext='Facebook'></span>
+                    <span class='st_twitter_large' displaytext='Tweet'></span>
+                    <span class='st_linkedin_large' displaytext='LinkedIn'></span>
+                    <span class='st_pinterest_large' displaytext='Pinterest'></span>
+                    <span class='st_email_large' displaytext='Email'></span>
+
                 </div>
                 <!--/.nav-collapse -->
             </div>
@@ -112,7 +127,8 @@
                         <li data-window="h"><a class="pickwindow" href="#">Last Hour</a></li>
                         <li data-window="d"><a class="pickwindow" href="#">Last Day</a></li>
                         <li data-window="w"><a class="pickwindow" href="#">Last Week</a></li>
-                        <li data-window="m"  class="active"><a class="pickwindow" href="#">Last Month</a></li>
+                        <li data-window="m" class="active"><a class="pickwindow" href="#">Last Month</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -134,11 +150,16 @@
                 }
 
                 <div class="well sidebar-nav">
-                    <small>This is a site to track what's buzzing related to Microsoft technologies, as shared by MVPs and other experts. A quick hack by <a href="http://amazedsaint.com">Anoop Madhusudanan</a>
-                        <br/> <iframe style="margin-top:10px; margin-bottom: 10px; width:150px; height:20px;" allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?show_screen_name=false&screen_name=amazedsaint">
-                </iframe>
-                        <hr/>
-                        <div class="badge"><a target="_blank" href="https://twitter.com/intent/user?screen_name=topsy">Powered by Topsy</a></div>
+                    <small>This is a site to track what's buzzing related to Microsoft technologies, as
+                        shared by MVPs and other experts. A quick hack by <a href="http://amazedsaint.com">Anoop
+                            Madhusudanan</a>
+                        <br />
+                        <iframe style="margin-top: 10px; margin-bottom: 10px; width: 150px; height: 20px;"
+                            allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?show_screen_name=false&screen_name=amazedsaint">
+                        </iframe>
+                        <hr />
+                        <div class="badge"><a target="_blank" href="https://twitter.com/intent/user?screen_name=topsy">
+                            Powered by Topsy</a></div>
                     </small>
                 </div>
 
@@ -157,7 +178,9 @@
                 <br />
                 <small>Disclaimer: This site, design, or content is not maintained or managed by Microsoft,
                     and may not be the opinion of Microsoft in anyway. All opinions are from the respective
-                    individuals and or MVPs, as pulled from Twitter. For the topics, the app may display popular tweets from non MVPs too. Data may not be 100% accurate as we are fetching based on keywords and queries ;)</small>
+                    individuals and or MVPs, as pulled from Twitter. For the topics, the app may display
+                    popular tweets from non MVPs too. Data may not be 100% accurate as we are fetching
+                    based on keywords and queries ;)</small>
             </div>
         </div>
     </div>
