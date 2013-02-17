@@ -5,8 +5,8 @@
         var buzzapp = (function () {
 
             var config = {};
-            config.window = "w";
-            config.type = "";
+            config.window = "d";
+            config.type ="@(Session["type"]??"")";
             config.term = "@ViewBag.Term";
 
             config.render = function (e) {
@@ -27,9 +27,7 @@
 
                             $('#subcontent').imagesLoaded(function() {
                                 $('#subcontent').masonry({
-                                    // options
-                                    itemSelector: '.tile',
-                                    columnWidth: 240
+                                    itemSelector: '.tile, .tileimage',
                                 });
                                 $("#loaddiv").hide();
                             });

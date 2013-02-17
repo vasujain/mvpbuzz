@@ -8,14 +8,19 @@
     {
         if (item.content != null)
         {
-        <div class="tile">
-            <div style="display: block">
-                <img src="@item.topsy_author_img" width="32" height="32"/>
+        <div class="tile" style="height: @(item.mytype=="image"?"600px":"300px")">
+            <div class="tiletitle">
+                <img src="@item.topsy_author_img" width="40" height="40"/>
                 &nbsp; <small><a class="note" href="/Home/View?s=@item.trackback_author_nick" target="_blank">
-                    <b>@item.trackback_author_name</b></a></small><br/>
+                                  <b>@item.trackback_author_name</b></a></small><br/>
+            </div>
+            <div style="display: block">
                 <iframe style="margin-top:10px; margin-bottom: 10px; width:150px; height:20px;" allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?show_screen_name=false&screen_name=@item.trackback_author_nick">
                 </iframe>
+
             </div>
+            
+            <div style="padding:7px">
             @if (item.medium_thumbnail != null)
             {
                 <div class="thumbnail">
@@ -28,14 +33,12 @@
             </div>
                 </a>
 
-            @if (item.mytype != "tweet")
-            {
-                <hr />
-                <div class="badge">@item.mytype
+            
+                <div class="badge badge-success">@item.mytype
                     | @item.hits shares
-                </div>  <br />
-                <small class="twittercontent">@h.Raw((string)item.content)</small>
-            }
+                </div>
+            
+            </div>
         </div>
         }
     }

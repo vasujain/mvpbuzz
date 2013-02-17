@@ -11,10 +11,12 @@ namespace AmazedSaint.MvpBuzz.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(string q = "MVP13", string t = "MVP13")
+        public ActionResult Index(string q = "MVP13", string t = "MVP13", string type="")
         {
             string query = Session["term"] as string ?? q;
             string title = Session["title"] as string ?? t;
+            if (!string.IsNullOrEmpty(type)) Session["type"] = type;
+
             ViewBag.Term = (string.IsNullOrEmpty(query) || string.IsNullOrWhiteSpace(query)) ? q : query;
             ViewBag.Title = (string.IsNullOrEmpty(title) || string.IsNullOrWhiteSpace(title)) ? t : title;
 
@@ -34,8 +36,10 @@ namespace AmazedSaint.MvpBuzz.Controllers
         {
             Session["term"] = s;
             Session["title"] = title ?? s;
+            Session["type"] = "";
             return RedirectToAction("Index");
         }
+
 
         public ActionResult About()
         {
@@ -52,6 +56,7 @@ namespace AmazedSaint.MvpBuzz.Controllers
         {
             var u = String.Format("http://otter.topsy.com/search.json?q={0}&window={1}&type={2}&apikey=2D33HFEUDVGQGLZAOQJQAAAAACGLANA4ENIQAAAAAAAFQGYA&perpage=100&allow_lang=en", HttpUtility.UrlEncode(term), window, type);
            dynamic obj = HttpContext.Cache[u];
+            Session["type"] = type;
 
            if (obj == null)
            {

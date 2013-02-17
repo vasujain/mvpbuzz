@@ -7,14 +7,12 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="/Content/bootstrap.min.css" />
     <link rel="stylesheet" href="/Content/bootstrap-responsive.min.css" />
-    <script type="text/javascript" src="/Scripts/imagesloaded.js"></script>
     <script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/imagesloaded.js"></script>
     <script type="text/javascript" src="/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="/Scripts/mansonary.js"></script>
-
-
-
-    <style>
+    
+  <style>
         .picktype
         {
         }
@@ -35,8 +33,29 @@
 
         .tile
         {
-            width: 200px;
             float: left;
+            width: 200px;
+            font-size: small;
+            padding: 1px;
+            border: 1px solid #efefef; 
+            color: black;
+        }
+
+        .tiletitle {
+            background-color: #007fff;
+            padding: 3px;
+            display: block;
+            color: white;
+        }
+
+        .tiletitle a {
+            color: white;
+        }
+
+        .tileimage
+        {
+            float: left;
+            width: 200px;
             margin: 10px;
             border: #dfdfdf 1px solid;
             padding: 7px;
@@ -66,21 +85,23 @@
                         <li><a href="@Url.Action("View", "Home", new { s = "#MVP13", title = "Mvp13" })">MVP13</a>
                         </li>
                         <li><a href="@Url.Action("View", "Home", new { s = "CSharp OR MSDN OR TypeScript OR VB.NET OR #VS2012", title = "Developers" })">
-                            Developers</a></li>
+                                Developers</a></li>
                         <li><a href="@Url.Action("View", "Home", new { s = "#Azure OR Office365 OR HadoopOnAzure OR HDInsight OR PowerPivot OR PowerView", title = "Cloud" })">
-                            Cloud</a></li>
+                                Cloud</a></li>
                         <li><a href="@Url.Action("View", "Home", new { s = "SQLServer OR HDInsight OR SQLAzure OR PowerPivot", title = "Data" })">
-                            Data</a></li>
+                                Data</a></li>
                         <li><a href="@Url.Action("View", "Home", new { s = "Windows8 OR WinRT OR Win8 OR Surface OR #surface", title = "Windows" })">
-                            Windows</a></li>
+                                Windows</a></li>
                         <li><a href="@Url.Action("View", "Home", new { s = "wp8 OR windowsphone OR #wpdev OR lumia920", title = "Phone" })">
-                            Phone</a></li>
+                                Phone</a></li>
                         <li><a href="@Url.Action("View", "Home", new { s = "SharePoint OR MSCRM OR PowerView", title = "SharePoint" })">
-                            Sharepoint</a></li>
+                                Sharepoint</a></li>
                         <li><a href="@Url.Action("View", "Home", new { s = "#mvpbuzz", title = "Buzz" })">Buzz</a>
                         </li>
                         <li><a href="@Url.Action("View", "Home", new { s = "XBox OR sp2013 OR lookingglass OR Surface OR Kinect", title = "Other" })">
-                            More..</a></li>
+                                More..</a></li>
+                        <li><a href="#about">
+                                About</a></li>
                     </ul>
                 </div>
                 <div class="nav-collapse collapse pull-right" style="padding-top:10px">
@@ -114,8 +135,8 @@
                 <div class="well sidebar-nav">
                     <ul class="nav nav-list">
                         <li class="nav-header">Show</li>
-                        <li data-type=""><a class="picktype" href="#">Everything</a></li>
-                        <li data-type="link" class="active"><a class="picktype" href="#">Articles</a></li>
+                        <li data-type="" class="active"><a class="picktype" href="#">Everything</a></li>
+                        <li data-type="link"><a class="picktype" href="#">Articles</a></li>
                         <li data-type="video"><a class="picktype" href="#">Videos</a></li>
                         <li data-type="image"><a class="picktype" href="#">Pictures</a></li>
                         <li data-type="tweet"><a class="picktype" href="#">Tweets</a></li>
@@ -125,8 +146,8 @@
                     <ul class="nav nav-list">
                         <li class="nav-header">Popular In</li>
                         <li data-window="h"><a class="pickwindow" href="#">Last Hour</a></li>
-                        <li data-window="d"><a class="pickwindow" href="#">Last Day</a></li>
-                        <li data-window="w" class="active"><a class="pickwindow" href="#">Last Week</a></li>
+                        <li data-window="d" class="active"><a class="pickwindow" href="#">Last Day</a></li>
+                        <li data-window="w" ><a class="pickwindow" href="#">Last Week</a></li>
                         <li data-window="m" ><a class="pickwindow" href="#">Last Month</a>
                         </li>
                     </ul>
@@ -174,7 +195,7 @@
             <!--/span-->
             <hr>
             <div class="span11">
-                <hr />
+                <hr /> <a name="about"></a>
                 <b>MvpBuzz </b>- <a href="http://amazedsaint.com">By Anoop </a>| <a href="https://github.com/amazedsaint/mvpbuzz">
                     Fork in Github</a>
                 <br />
