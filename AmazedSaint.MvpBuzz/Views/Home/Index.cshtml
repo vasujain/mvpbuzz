@@ -30,6 +30,7 @@
                                     itemSelector: '.tile, .tileimage',
                                 });
                                 $("#loaddiv").hide();
+                                $("[rel='tooltip']").popover();
                             });
                  });
                 e.parent().siblings().removeClass("active");
@@ -49,6 +50,8 @@
                 buzzapp.type = $(this).parent().attr("data-type");
                 buzzapp.render($(this));
             });
+
+
             //For the first time
             buzzapp.render($(this));
         });

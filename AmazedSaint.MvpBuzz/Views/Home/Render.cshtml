@@ -30,7 +30,7 @@
 
                 @if (item.url!=null && item.mytype!="tweet")
                 {
-                    <a href="@item.url" >
+                       <a rel="tooltip" data-toggle="popover" data-trigger="hover" data-title="@item.trackback_author_name says"  data-content="@Html.Encode(h.Raw((string)item.content))" href="@item.url" >
                         <div class="twittercontent">
                             @h.Raw((string) item.title)
                         </div>
@@ -38,9 +38,11 @@
                 }
                 else
                 {
-                        <div class="twittercontent">
-                            @h.Raw((string) item.title)
-                        </div>
+                 
+                            <div class="twittercontent">
+                                @h.Raw((string) item.title)
+                            </div>
+                        
                 }
 
             
