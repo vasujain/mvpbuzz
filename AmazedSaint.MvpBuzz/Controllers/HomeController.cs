@@ -11,7 +11,7 @@ namespace AmazedSaint.MvpBuzz.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(string q = "MVP13", string t = "MVP13", string type="")
+        public ActionResult Index(string q = "MVP13 OR MVPBUZZ OR MVP2013 OR MVPSUMMIT2013", string t = "Mvp Summit", string type = "")
         {
             string query = Session["term"] as string ?? q;
             string title = Session["title"] as string ?? t;
