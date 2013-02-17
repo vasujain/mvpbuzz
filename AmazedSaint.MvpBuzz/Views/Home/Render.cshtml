@@ -27,11 +27,21 @@
                     <img src="@item.medium_thumbnail" alt="@item.title"/>
                 </div>
             }
-            <a href="@(item.url??"")" >
-            <div class="twittercontent">
-                @h.Raw((string)item.title)
-            </div>
-                </a>
+
+                @if (item.url!=null && item.mytype!="tweet")
+                {
+                    <a href="@item.url" >
+                        <div class="twittercontent">
+                            @h.Raw((string) item.title)
+                        </div>
+                    </a>
+                }
+                else
+                {
+                        <div class="twittercontent">
+                            @h.Raw((string) item.title)
+                        </div>
+                }
 
             
                 <div class="badge badge-success">@item.mytype
